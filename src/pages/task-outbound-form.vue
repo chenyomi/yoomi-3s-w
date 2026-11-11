@@ -9,11 +9,9 @@ const temp = ref([])
 const tempSelect = ref()
 watch(() => tempSelect.value, newVal => {
   const item = temp.value.filter(e => e.id == newVal)[0]
+  if (!item || !webGL) return
   formData.value = cloneDeep(item)
-  webGL.disWebGl()
-  setTimeout(() => {
-    webGL.updata(formData.value)
-  }, 0)
+  webGL.updata(formData.value)
 })
 taskApi.taskStorageSelector().then(res => {
   temp.value = res.data
@@ -34,10 +32,7 @@ const formData = ref({
 const proType = getDict('sss_material_template_shape')
 
 const onChange = () => {
-  webGL.disWebGl()
-  setTimeout(() => {
-    webGL.updata(formData.value)
-  }, 0)
+  webGL && webGL.updata(formData.value)
 }
 
 onMounted(() => {
@@ -46,7 +41,7 @@ onMounted(() => {
   }, 0)
 })
 onUnmounted(() => {
-  webGL.disWebGl()
+  webGL && webGL.disWebGl()
 })
 defineExpose({
   formData

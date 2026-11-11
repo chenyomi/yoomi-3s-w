@@ -50,6 +50,7 @@ watch(() => [formData.value.materialFinishName, formData.value.loadHandId, formD
 })
 
 watch(() => dialog.value, newVal => {
+  if (!mdAndDown.value) return
   nextTick(() => {
     if (newVal) {
       if (webGL) {
@@ -181,9 +182,7 @@ onMounted(() => {
   })
 })
 onUnmounted(() => {
-  if (!mdAndDown.value) {
-    webGL && webGL.disWebGl()
-  }
+  webGL && webGL.disWebGl()
 })
 </script>
 

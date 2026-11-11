@@ -16,7 +16,7 @@ onMounted(() => {
   }, 500)
 })
 onUnmounted(() => {
-  webGL.disWebGl()
+  webGL && webGL.disWebGl()
 })
 </script>
 

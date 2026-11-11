@@ -45,8 +45,7 @@ const onChange = () => {
     storagePalletId: select.value
   })
   modalData.value = desserts.value.filter(e => e.value == select.value)[0]
-  webGL.disWebGl()
-  webGL.updata({
+  webGL && webGL.updata({
     ...modalData.value.storagePallet,
     materialList: []
   })
@@ -75,8 +74,7 @@ onMounted(() => {
           e.storagePalletId = select.value
           storageApi.getStorageMaterial(e).then(res => {
             modalData.value.storagePallet = res.data
-            webGL.disWebGl()
-            webGL.updata(modalData.value.storagePallet)
+            webGL && webGL.updata(modalData.value.storagePallet)
           })
         }).finally(() => {
           close()
@@ -150,7 +148,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  webGL.disWebGl()
+  webGL && webGL.disWebGl()
 })
 </script>
 
